@@ -1,0 +1,293 @@
+.edit-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.edit-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  padding: 0.5rem 1rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #5568d3;
+}
+
+.edit-header h1 {
+  color: #667eea;
+  flex: 1;
+}
+
+.hero-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.hero-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.big-image {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-image img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.gif-preview {
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gif-preview img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.hero-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-group label {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.95rem;
+}
+
+.disabled-input,
+.editable-input,
+.inline-edit-input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.disabled-input {
+  background: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.capitalized {
+  text-transform: capitalize;
+}
+
+.editable-input {
+  border-color: #667eea;
+}
+
+.inline-edit-input {
+  flex: 1;
+  border-color: #764ba2;
+}
+
+.edit-field {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.save-btn,
+.add-btn,
+.delete-btn,
+.inline-save-btn,
+.inline-cancel-btn,
+.edit-item-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn,
+.add-btn {
+  background: #667eea;
+  color: white;
+}
+
+.save-btn:hover,
+.add-btn:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+.inline-save-btn {
+  background: #28a745;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.inline-cancel-btn {
+  background: #6c757d;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.edit-item-btn {
+  background: #ffc107;
+  color: #333;
+  padding: 0.5rem 1rem;
+}
+
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.action-group {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.action-group h4 {
+  color: #764ba2;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.danger-zone {
+  background: #fff5f5;
+  border: 2px solid #dc3545;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.danger-zone h3 {
+  color: #dc3545;
+  margin-bottom: 0.5rem;
+}
+
+.danger-zone p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.delete-hero-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-hero-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.error-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  color: #dc3545;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .edit-page {
+    padding: 1rem;
+  }
+  
+  .edit-container {
+    padding: 1rem;
+  }
+  
+  .edit-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .edit-field {
+    flex-direction: column;
+  }
+  
+  .save-btn,
+  .add-btn,
+  .delete-btn {
+    width: 100%;
+  }
+}
