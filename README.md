@@ -48,8 +48,8 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-
-<img src='https://github.com/roeldcrodua/Crewmates/blob/main/src/assets/demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+          
+<img src='https://github.com/roeldcrodua/Crewmates/blob/master/src/assets/demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with Wondershare Uniconverter 14 Tool - GIF Maker
