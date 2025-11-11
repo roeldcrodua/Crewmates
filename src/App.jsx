@@ -6,7 +6,7 @@ import EditPokeHero from './pages/EditPokeHero';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Crewmates">
       <div className="app">
         <header className="app-header">
           <h1>🎮 Crewmates Pokemon 🎮</h1>
