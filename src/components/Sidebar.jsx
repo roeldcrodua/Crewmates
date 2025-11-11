@@ -53,19 +53,19 @@ const Sidebar = () => {
         <p className="sidebar-empty">No crewmates yet!</p>
       ) : (
         <div className="sidebar-list">
-          {crewmates.map((hero) => (
+          {crewmates.map((crew) => (
             <Link 
-              key={hero.pokemon_id} 
-              to={`/hero/${hero.pokemon_id}`}
+              key={crew.pokemon_id} 
+              to={`/crew/${crew.pokemon_id}`}
               className="sidebar-item"
             >
               <img 
-                src={hero.avatar_small_url || hero.avatar_big_url} 
-                alt={hero.display_name}
+                src={crew.avatar_small_url || crew.avatar_big_url} 
+                alt={crew.display_name}
               />
               <div className="sidebar-item-info">
-                <span className="sidebar-item-name">{hero.display_name}</span>
-                <span className="sidebar-item-original">({hero.pokemon_name})</span>
+                <span className="sidebar-item-name">{crew.display_name}</span>
+                <span className="sidebar-item-original">({crew.pokemon_name})</span>
               </div>
             </Link>
           ))}

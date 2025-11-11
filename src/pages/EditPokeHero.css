@@ -4,6 +4,29 @@
   margin: 0 auto;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .edit-container {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
@@ -37,33 +60,48 @@
   flex: 1;
 }
 
-.hero-details {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.crew-details{
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
-.hero-image-section {
+.crew-image-section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
+  align-items: stretch;
+}
+
+.image-gif-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
 }
 
 .big-image {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 12px;
   padding: 2rem;
-  width: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 300px;
 }
 
 .big-image img {
   max-width: 100%;
-  height: auto;
+  min-height: 100%;
+  object-fit: contain;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.gif-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .gif-preview {
@@ -71,17 +109,36 @@
   border-radius: 8px;
   padding: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+}
+
+.gif-preview label {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.85rem;
 }
 
 .gif-preview img {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
 }
 
-.hero-info-section {
+.disabled-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+.disabled-fields .info-group {
+  flex: 1;
+}
+
+.crew-info-section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -129,8 +186,10 @@
 
 .edit-field {
   display: flex;
+  flex-direction: row;
   gap: 0.5rem;
   align-items: center;
+  flex: 1;
 }
 
 .save-btn,
@@ -203,7 +262,22 @@
   border-radius: 8px;
 }
 
+.actions-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+.actions-row .action-group {
+  flex: 1;
+}
+
 .action-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
   background: #f8f9fa;
   padding: 1rem;
   border-radius: 8px;
@@ -212,7 +286,8 @@
 
 .action-group h4 {
   color: #764ba2;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+  margin-right: 0.5rem;
   font-size: 0.9rem;
 }
 
@@ -234,7 +309,7 @@
   margin-bottom: 1rem;
 }
 
-.delete-hero-btn {
+.delete-crew-btn {
   width: 100%;
   padding: 1rem;
   background: #dc3545;
@@ -247,7 +322,7 @@
   transition: all 0.2s ease;
 }
 
-.delete-hero-btn:hover {
+.delete-crew-btn:hover {
   background: #c82333;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
@@ -264,7 +339,7 @@
 }
 
 @media (max-width: 768px) {
-  .hero-details {
+  .crew-details {
     grid-template-columns: 1fr;
   }
   
