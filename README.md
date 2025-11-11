@@ -1,4 +1,7 @@
 # Web Development Project 7 - Crewmates Pokemon
+
+https://roeldcrodua.github.io/Crewmates
+
 Submitted by: Roel Crodua
 
 This web app:
@@ -43,7 +46,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [x] Deploy the app to github-pages: https://roeldcrodua.github.io/Crewmates
 
 ## Video Walkthrough
 
