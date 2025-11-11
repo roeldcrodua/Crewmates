@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CreatePokeHero />} />
           <Route path="/gallery" element={<ReadPokeHero />} />
-          <Route path="/hero/:id" element={<EditPokeHero />} />
+          <Route path="/crew/:id" element={<EditPokeHero />} />
         </Routes>
       </div>
     </Router>
