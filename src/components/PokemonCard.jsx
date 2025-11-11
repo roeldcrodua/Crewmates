@@ -1,12 +1,11 @@
 import React from 'react';
 import './PokemonCard.css';
 
-const PokemonCard = ({ pokemon, onHover, onLeave }) => {
+const PokemonCard = ({ pokemon, onClick }) => {
   return (
     <div 
       className="pokemon-card"
-      onMouseEnter={() => onHover(pokemon)}
-      onMouseLeave={onLeave}
+      onClick={() => onClick(pokemon)}
     >
       <img 
         src={pokemon.imageUrl} 
