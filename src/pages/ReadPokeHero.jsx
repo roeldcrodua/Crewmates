@@ -4,15 +4,15 @@ import { supabase } from '../client';
 import './ReadPokeHero.css';
 
 const ReadPokeHero = () => {
-  const [heroes, setHeroes] = useState([]);
+  const [crews, setCrews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({});
 
   useEffect(() => {
-    fetchHeroes();
+    fetchCrews();
   }, []);
 
-  const fetchHeroes = async () => {
+  const fetchCrews = async () => {
     try {
       const { data, error } = await supabase
         .from('pokemon')
@@ -21,17 +21,17 @@ const ReadPokeHero = () => {
       
       if (error) throw error;
       
-      setHeroes(data || []);
+      setCrews(data || []);
       calculateStats(data || []);
     } catch (error) {
-      console.error('Error fetching heroes:', error);
+      console.error('Error fetching crews:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const calculateStats = (heroList) => {
-    if (heroList.length === 0) {
+  const calculateStats = (crewList) => {
+    if (crewList.length === 0) {
       setStats({});
       return;
     }
@@ -40,22 +40,22 @@ const ReadPokeHero = () => {
     const typeCounts = {};
     const abilityCounts = {};
     
-    heroList.forEach(hero => {
-      if (hero.types && Array.isArray(hero.types)) {
-        hero.types.forEach(type => {
+    crewList.forEach(crew => {
+      if (crew.types && Array.isArray(crew.types)) {
+        crew.types.forEach(type => {
           typeCounts[type] = (typeCounts[type] || 0) + 1;
         });
       }
       
-      if (hero.abilities && Array.isArray(hero.abilities)) {
-        hero.abilities.forEach(ability => {
+      if (crew.abilities && Array.isArray(crew.abilities)) {
+        crew.abilities.forEach(ability => {
           abilityCounts[ability] = (abilityCounts[ability] || 0) + 1;
         });
       }
     });
 
     setStats({
-      total: heroList.length,
+      total: crewList.length,
       typeCounts,
       abilityCounts,
       mostCommonType: Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a])[0],
@@ -76,7 +76,7 @@ const ReadPokeHero = () => {
     <div className="gallery-page">
       <div className="gallery-header">
         <h1>🌟 My Pokemon Crew Gallery 🌟</h1>
-        <p className="gallery-count">Total Heroes: {heroes.length}</p>
+        <p className="gallery-count">Total crews: {crews.length}</p>
       </div>
 
       {stats.total > 0 && (
@@ -128,34 +128,34 @@ const ReadPokeHero = () => {
         </div>
       )}
 
-      {heroes.length === 0 ? (
+      {crews.length === 0 ? (
         <div className="empty-state">
-          <h2>No Pokemon Heroes Yet!</h2>
+          <h2>No Pokemon crews Yet!</h2>
           <p>Start building your crew by discovering Pokemon on the main page.</p>
           <Link to="/" className="cta-button">Discover Pokemon</Link>
         </div>
       ) : (
-        <div className="heroes-grid">
-          {heroes.map((hero) => (
+        <div className="crews-grid">
+          {crews.map((crew) => (
             <Link 
-              key={hero.pokemon_id} 
-              to={`/hero/${hero.pokemon_id}`}
-              className="hero-card"
+              key={crew.pokemon_id} 
+              to={`/crew/${crew.pokemon_id}`}
+              className="crew-card"
             >
-              <div className="hero-card-image">
+              <div className="crew-card-image">
                 <img 
-                  src={hero.avatar_big_url || hero.avatar_small_url} 
-                  alt={hero.display_name}
+                  src={crew.avatar_big_url || crew.avatar_small_url} 
+                  alt={crew.display_name}
                 />
               </div>
               
-              <div className="hero-card-content">
-                <h3 className="hero-display-name">{hero.display_name}</h3>
-                <p className="hero-original-name">({hero.pokemon_name})</p>
+              <div className="crew-card-content">
+                <h3 className="crew-display-name">{crew.display_name}</h3>
+                <p className="crew-original-name">({crew.pokemon_name})</p>
                 
-                {hero.types && hero.types.length > 0 && (
-                  <div className="hero-types">
-                    {hero.types.map((type, idx) => (
+                {crew.types && crew.types.length > 0 && (
+                  <div className="crew-types">
+                    {crew.types.map((type, idx) => (
                       <span key={idx} className={`type-badge type-${type}`}>
                         {type}
                       </span>
@@ -163,21 +163,21 @@ const ReadPokeHero = () => {
                   </div>
                 )}
                 
-                {hero.abilities && hero.abilities.length > 0 && (
-                  <div className="hero-abilities">
-                    {hero.abilities.slice(0, 2).map((ability, idx) => (
+                {crew.abilities && crew.abilities.length > 0 && (
+                  <div className="crew-abilities">
+                    {crew.abilities.slice(0, 2).map((ability, idx) => (
                       <span key={idx} className="ability-badge">
                         {ability}
                       </span>
                     ))}
-                    {hero.abilities.length > 2 && (
-                      <span className="ability-more">+{hero.abilities.length - 2}</span>
+                    {crew.abilities.length > 2 && (
+                      <span className="ability-more">+{crew.abilities.length - 2}</span>
                     )}
                   </div>
                 )}
               </div>
               
-              <div className="hero-card-footer">
+              <div className="crew-card-footer">
                 <span className="view-details">View Details →</span>
               </div>
             </Link>

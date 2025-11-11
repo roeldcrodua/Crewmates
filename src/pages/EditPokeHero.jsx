@@ -6,7 +6,7 @@ import './EditPokeHero.css';
 const EditPokeHero = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [hero, setHero] = useState(null);
+  const [crew, setCrew] = useState(null);
   const [loading, setLoading] = useState(true);
   const [displayName, setDisplayName] = useState('');
   const [types, setTypes] = useState([]);
@@ -23,10 +23,10 @@ const EditPokeHero = () => {
   const [editAbilityValue, setEditAbilityValue] = useState('');
 
   useEffect(() => {
-    fetchHero();
+    fetchCrew();
   }, [id]);
 
-  const fetchHero = async () => {
+  const fetchCrew = async () => {
     try {
       const { data, error } = await supabase
         .from('pokemon')
@@ -36,13 +36,13 @@ const EditPokeHero = () => {
       
       if (error) throw error;
       
-      setHero(data);
+      setCrew(data);
       setDisplayName(data.display_name || '');
       setTypes(data.types || []);
       setAbilities(data.abilities || []);
     } catch (error) {
-      console.error('Error fetching hero:', error);
-      alert('Failed to load Pokemon hero');
+      console.error('Error fetching crew:', error);
+      alert('Failed to load Pokemon crew');
       navigate('/gallery');
     } finally {
       setLoading(false);
@@ -67,7 +67,7 @@ const EditPokeHero = () => {
       if (error) throw error;
       
       alert('Display name updated successfully!');
-      fetchHero();
+      fetchCrew();
     } catch (error) {
       console.error('Error updating display name:', error);
       alert('Failed to update display name');
@@ -303,7 +303,7 @@ const EditPokeHero = () => {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm(`Are you sure you want to delete ${hero.display_name} from your crew?`)) {
+    if (!window.confirm(`Are you sure you want to delete ${crew.display_name} from your crew?`)) {
       return;
     }
 
@@ -315,11 +315,11 @@ const EditPokeHero = () => {
       
       if (error) throw error;
       
-      alert('Pokemon hero deleted successfully!');
+      alert('Pokemon crew deleted successfully!');
       navigate('/gallery');
     } catch (error) {
-      console.error('Error deleting hero:', error);
-      alert('Failed to delete Pokemon hero');
+      console.error('Error deleting crew:', error);
+      alert('Failed to delete Pokemon crew');
     }
   };
 
@@ -327,13 +327,13 @@ const EditPokeHero = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p>Loading hero details...</p>
+        <p>Loading crew details...</p>
       </div>
     );
   }
 
-  if (!hero) {
-    return <div className="error-message">Hero not found</div>;
+  if (!crew) {
+    return <div className="error-message">crew not found</div>;
   }
 
   return (
@@ -343,37 +343,55 @@ const EditPokeHero = () => {
           <button onClick={() => navigate('/gallery')} className="back-btn">
             ← Back to Gallery
           </button>
-          <h1>Pokemon Hero Details</h1>
+          <h1>Pokemon Crew Details</h1>
         </div>
 
-        <div className="hero-details">
-          <div className="hero-image-section">
-            <div className="big-image">
-              <img src={hero.avatar_big_url || hero.avatar_small_url} alt={hero.display_name} />
-            </div>
-            {hero.gif_front_url && (
-              <div className="gif-preview">
-                <img src={hero.gif_front_url} alt={`${hero.display_name} gif`} />
+        <div className="crew-details">
+          <div className="crew-image-section">
+            <div className="image-gif-row">
+              <div className="big-image">
+                <img src={crew.avatar_big_url || crew.avatar_small_url} alt={crew.display_name} />
               </div>
-            )}
+              <div className="gif-container">
+                {crew.avatar_big_url && (
+                  <div className="gif-preview">
+                    <label>Artwork</label>
+                    <img src={crew.avatar_big_url} alt={`${crew.display_name} artwork`} />
+                  </div>
+                )}
+                {crew.gif_front_url && (
+                  <div className="gif-preview">
+                    <label>Front</label>
+                    <img src={crew.gif_front_url} alt={`${crew.display_name} front gif`} />
+                  </div>
+                )}
+                {crew.gif_back_url && (
+                  <div className="gif-preview">
+                    <label>Back </label>
+                    <img src={crew.gif_back_url} alt={`${crew.display_name} back gif`} />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="disabled-fields">
+              <div className="info-group">
+                <label>Pokemon ID (Cannot be modified)</label>
+                <input type="text" value={crew.pokemon_id} disabled className="disabled-input" />
+              </div>
+
+              <div className="info-group">
+                <label>Original Pokemon Name (Cannot be modified)</label>
+                <input 
+                  type="text" 
+                  value={crew.pokemon_name} 
+                  disabled 
+                  className="disabled-input capitalized" 
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="hero-info-section">
-            <div className="info-group">
-              <label>Pokemon ID (Cannot be modified)</label>
-              <input type="text" value={hero.pokemon_id} disabled className="disabled-input" />
-            </div>
-
-            <div className="info-group">
-              <label>Original Pokemon Name (Cannot be modified)</label>
-              <input 
-                type="text" 
-                value={hero.pokemon_name} 
-                disabled 
-                className="disabled-input capitalized" 
-              />
-            </div>
-
+          <div className="crew-info-section">
             <div className="info-group">
               <label>Display Name (Editable)</label>
               <div className="edit-field">
@@ -421,35 +439,37 @@ const EditPokeHero = () => {
                 ))}
               </div>
               
-              <div className="action-group">
-                <h4>Add Type</h4>
-                <div className="edit-field">
-                  <input 
-                    type="text"
-                    value={newType}
-                    onChange={(e) => setNewType(e.target.value)}
-                    placeholder="Enter new type"
-                    className="editable-input"
-                  />
-                  <button onClick={handleAddType} className="add-btn">
-                    Add
-                  </button>
+              <div className="actions-row">
+                <div className="action-group">
+                  <h4>Add Type</h4>
+                  <div className="edit-field">
+                    <input 
+                      type="text"
+                      value={newType}
+                      onChange={(e) => setNewType(e.target.value)}
+                      placeholder="Enter new type"
+                      className="editable-input"
+                    />
+                    <button onClick={handleAddType} className="add-btn">
+                      Add
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div className="action-group">
-                <h4>Delete Type</h4>
-                <div className="edit-field">
-                  <input 
-                    type="text"
-                    value={deleteTypeInput}
-                    onChange={(e) => setDeleteTypeInput(e.target.value)}
-                    placeholder="Type exact name to delete"
-                    className="editable-input"
-                  />
-                  <button onClick={handleDeleteType} className="delete-btn">
-                    Delete
-                  </button>
+                <div className="action-group">
+                  <h4>Delete Type</h4>
+                  <div className="edit-field">
+                    <input 
+                      type="text"
+                      value={deleteTypeInput}
+                      onChange={(e) => setDeleteTypeInput(e.target.value)}
+                      placeholder="Type exact name to delete"
+                      className="editable-input"
+                    />
+                    <button onClick={handleDeleteType} className="delete-btn">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -486,44 +506,46 @@ const EditPokeHero = () => {
                 ))}
               </div>
               
-              <div className="action-group">
-                <h4>Add Ability</h4>
-                <div className="edit-field">
-                  <input 
-                    type="text"
-                    value={newAbility}
-                    onChange={(e) => setNewAbility(e.target.value)}
-                    placeholder="Enter new ability"
-                    className="editable-input"
-                  />
-                  <button onClick={handleAddAbility} className="add-btn">
-                    Add
-                  </button>
+              <div className="actions-row">
+                <div className="action-group">
+                  <h4>Add Ability</h4>
+                  <div className="edit-field">
+                    <input 
+                      type="text"
+                      value={newAbility}
+                      onChange={(e) => setNewAbility(e.target.value)}
+                      placeholder="Enter new ability"
+                      className="editable-input"
+                    />
+                    <button onClick={handleAddAbility} className="add-btn">
+                      Add
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div className="action-group">
-                <h4>Delete Ability</h4>
-                <div className="edit-field">
-                  <input 
-                    type="text"
-                    value={deleteAbilityInput}
-                    onChange={(e) => setDeleteAbilityInput(e.target.value)}
-                    placeholder="Type exact name to delete"
-                    className="editable-input"
-                  />
-                  <button onClick={handleDeleteAbility} className="delete-btn">
-                    Delete
-                  </button>
+                <div className="action-group">
+                  <h4>Delete Ability</h4>
+                  <div className="edit-field">
+                    <input 
+                      type="text"
+                      value={deleteAbilityInput}
+                      onChange={(e) => setDeleteAbilityInput(e.target.value)}
+                      placeholder="Type exact name to delete"
+                      className="editable-input"
+                    />
+                    <button onClick={handleDeleteAbility} className="delete-btn">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="danger-zone">
               <h3>Danger Zone</h3>
-              <p>Once you delete this Pokemon hero, there is no going back.</p>
-              <button onClick={handleDelete} className="delete-hero-btn">
-                Delete This Pokemon Hero
+              <p>Once you delete this Pokemon crew, there is no going back.</p>
+              <button onClick={handleDelete} className="delete-crew-btn">
+                Delete This Pokemon crew
               </button>
             </div>
           </div>

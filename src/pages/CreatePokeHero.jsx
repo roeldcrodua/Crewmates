@@ -96,7 +96,7 @@ const CreatePokeHero = () => {
       return {
         id: data.id,
         name: data.name,
-        imageUrl: data.sprites.other.home.front_default,
+        imageUrl: data.sprites.other["home"]?.front_default,
         artwork: data.sprites.other["official-artwork"]?.front_shiny || 
                  data.sprites.other["official-artwork"]?.front_default,
         frontGif: data.sprites.other.showdown?.front_shiny || 
@@ -113,7 +113,7 @@ const CreatePokeHero = () => {
     }
   };
 
-  const handleMouseEnter = (pokemon, event) => {
+  const handleCardClick = (pokemon, event) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const popupWidth = 500; // max-width from CSS
     const popupHeight = 600; // estimated max height
@@ -155,10 +155,6 @@ const CreatePokeHero = () => {
     setPopupPosition({ x, y });
   };
 
-  const handleMouseLeave = () => {
-    // Don't immediately close - let user interact with popup
-  };
-
   const handleClosePopup = () => {
     setHoveredPokemon(null);
   };
@@ -174,11 +170,11 @@ const CreatePokeHero = () => {
     if (!hoveredPokemon) return;
 
     try {
-      const heroData = {
+      const crewData = {
         pokemon_id: hoveredPokemon.id,
         pokemon_name: selectedFields.name ? hoveredPokemon.name : '',
         display_name: hoveredPokemon.name,
-        avatar_big_url: selectedFields.imageUrl ? hoveredPokemon.imageUrl : '',
+        avatar_big_url: hoveredPokemon.imageUrl,
         gif_front_url: selectedFields.frontGif ? hoveredPokemon.frontGif : '',
         gif_back_url: selectedFields.backGif ? hoveredPokemon.backGif : '',
         avatar_small_url: hoveredPokemon.smallUrl,
@@ -188,7 +184,7 @@ const CreatePokeHero = () => {
 
       const { error } = await supabase
         .from('pokemon')
-        .insert([heroData]);
+        .insert([crewData]);
 
       if (error) throw error;
 
@@ -251,11 +247,10 @@ const CreatePokeHero = () => {
         ) : (
           <div className="pokemon-grid">
             {pokemonList.map((pokemon) => (
-              <div key={`${pokemon.id}-${Math.random()}`} onMouseEnter={(e) => handleMouseEnter(pokemon, e)}>
+              <div key={`${pokemon.id}-${Math.random()}`} onClick={(e) => handleCardClick(pokemon, e)}>
                 <PokemonCard 
                   pokemon={pokemon}
-                  onHover={() => {}}
-                  onLeave={handleMouseLeave}
+                  onClick={() => {}}
                 />
               </div>
             ))}
